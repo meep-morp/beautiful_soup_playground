@@ -1,6 +1,10 @@
 import requests
 import pandas as pd
+from datetime import date
 from bs4 import BeautifulSoup as bs
+from emailer import email_file
+
+today = date.today()
 
 
 def extract(start, location="Huntsville, AL", query="software engineer"):
@@ -50,3 +54,16 @@ df = pd.DataFrame(joblist)
 
 print(df.head())
 df.to_csv('jobs.csv')
+
+# Email list of jobs
+options = {
+    'attachments': ["jobs.csv"],
+    'subject': f"List of jobs for {today}",
+    'content': """
+    Here is the list of jobs for today:
+    
+        - Python Bot 
+    """,
+}
+
+email_file(options=options)

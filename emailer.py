@@ -11,7 +11,7 @@ load_dotenv()
     options {
         attachments: [],
         subject: "",
-        content: [],
+        content: "",
         html: "",
     }
 """
@@ -21,7 +21,7 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 RECIPIENT_EMAIL = os.getenv('RECIPIENT_EMAIL')
 
 
-def email_file(receiver, options={}):
+def email_file(receiver=RECIPIENT_EMAIL, options={}):
     # Setup Message
     msg = EmailMessage()
     msg['Subject'] = options['subject']
